@@ -1,31 +1,30 @@
 package com.epam.day3.main;
 
-import com.epam.day3.consoleReader.ConsoleReader;
+import com.epam.day3.creater.BallCreator;
+import com.epam.day3.creater.BasketCreator;
 import com.epam.day3.entity.Ball;
 import com.epam.day3.entity.Basket;
+import com.epam.day3.entity.Color;
 import com.epam.day3.exception.CustomException;
-import com.epam.day3.parser.Parser;
 import com.epam.day3.service.BasketService;
 
-import java.io.IOException;
+import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws CustomException, IOException {
-        BasketService service = new BasketService();
-        Basket basket = new Basket();
-        ConsoleReader reader = new ConsoleReader();
-        Parser parser = new Parser();
-        int sum = 0;
-        boolean flag = true;
-        while (flag) {
-            String s = reader.readString();
-            Ball ball = parser.parseToBall(s);
-            if(ball.getVolume()> basket.getMAX_CAPACITY() - sum ){
-               flag = false;
-            }
-            sum += ball.getVolume();
-            basket = service.fillBasket(ball, basket);
-            System.out.println(basket.toString());
-        }
+    public static void main(String[] args) throws CustomException {
+        BasketCreator creator = new BasketCreator();
+        BallCreator ballCreator = new BallCreator();
+       List<Ball> ball = ballCreator.createBallsList();
+       Basket basket = creator.createEmptyBasket();
+       BasketService service = new BasketService();
+       double occupiedPlace = service.calculateOccupiedPlace(basket);
+        System.out.println(Basket.occupiedPlace);
+        service.fillUplBasket(ball, basket);
+           System.out.println("yes");
+           System.out.println(Basket.occupiedPlace);
+         double weight = service.calculateBallWeight(basket);
+         int count = service.countOneColorBall(basket, Color.BLUE);
+        System.out.println("weight  " + weight +" blue " + count);
+        System.out.println(basket.toString());
     }
 }

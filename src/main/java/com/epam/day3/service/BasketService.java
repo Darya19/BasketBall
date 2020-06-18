@@ -1,58 +1,66 @@
 package com.epam.day3.service;
 
-import com.epam.day3.consoleReader.ConsoleReader;
-import com.epam.day3.parser.Parser;
 import com.epam.day3.entity.Ball;
 import com.epam.day3.entity.Basket;
 import com.epam.day3.entity.Color;
+import com.epam.day3.exception.CustomException;
+import com.epam.day3.validator.BallValidator;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.List;
 
 public class BasketService {
 
-    public Basket fillBasket(Ball ball, Basket basket) throws IOException {
-        double sumVolume = 0;
-        for (int i = 0; i < basket.getBasket().size() ; i++) {
-            sumVolume += basket.getBasket().get(i).getVolume();
-        }
-            if ((basket.getMAX_CAPACITY() - sumVolume) > ball.getVolume()) {
-                basket.setBasket(ball);
+    public double calculateOccupiedPlace(Basket basket) throws CustomException {
+        if (basket == null) {
+            throw new CustomException("basket is empty");
+        } else {
+            Basket.occupiedPlace = 0;
+            for (int i = 0; i < basket.size(); i++) {
+                Basket.occupiedPlace += basket.get(i).getVolume();
             }
-      /*  Basket basket = new Basket();
-        BallService service = new BallService();
-        double sumVolumeOfBalls = 0;
-           Ball newBall = service.generateBall();
-            sumVolumeOfBalls += newBall.getVolume();
-            if ((basket.getMAX_CAPACITY() - sumVolumeOfBalls) > newBall.getVolume()) {
-            basket.setBasket(newBall); }*/
-        return basket;
-    }
-
-    public  boolean isNotFullBasket(Basket basket) {
-        int sumVolume = 0;
-        for (int i = 0; i < basket.getBasket().size() ; i++) {
-            sumVolume += basket.getBasket().get(i).getVolume();
+            return Basket.occupiedPlace;
         }
-            return (basket.getMAX_CAPACITY() > sumVolume);
     }
 
-    public int countBlueBall(Basket basket) {
-        int count = 0;
-        for (int i = 0; i < basket.getBasket().size(); i++) {
-            if (basket.getBasket().get(i).getColor() == Color.BLUE) {
-                count++;
+    public double fillUplBasket(List<Ball> balls, Basket basket) throws CustomException {
+        double freePlace;
+        if (basket == null) {
+            throw new CustomException("basket is empty");
+        } else {
+            for (int i = 0; i < balls.size(); i++) {
+                if ((basket.getMaxCapacity() - Basket.occupiedPlace) > balls.get(i).getVolume()) {
+                    basket.add(balls.get(i));
+                    Basket.occupiedPlace += balls.get(i).getVolume();
+                }
             }
+            freePlace = basket.getMaxCapacity() - Basket.occupiedPlace;
         }
-        return count;
+        return freePlace;
     }
 
-    public int calculateBallWeight(Basket basket) {
-        int sumWeigh = 0;
-        for (int i = 0; i < basket.getBasket().size(); i++) {
-            sumWeigh += basket.getBasket().get(i).getWeight();
+    public int countOneColorBall(Basket basket, Color color) throws CustomException {
+        if (basket == null) {
+            throw new CustomException("basket is empty");
+        } else {
+            int count = 0;
+            for (int i = 0; i < basket.size(); i++) {
+                if (basket.get(i).getColor() == color) {
+                    count++;
+                }
+            }
+            return count;
         }
-        return sumWeigh;
+    }
+
+    public double calculateBallWeight(Basket basket) throws CustomException {
+        if (basket == null) {
+            throw new CustomException("basket is empty");
+        } else {
+            double sumWeigh = 0;
+            for (int i = 0; i < basket.size(); i++) {
+                sumWeigh = (sumWeigh + basket.get(i).getWeight());
+            }
+            return sumWeigh;
+        }
     }
 }

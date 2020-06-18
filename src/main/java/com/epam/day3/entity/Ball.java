@@ -2,24 +2,24 @@ package com.epam.day3.entity;
 
 public class Ball {
 
-    private int weight;
+    private double weight;
     private double volume;
     private Color color;
 
     public Ball() {
     }
 
-    public Ball(int weight, double volume, Color color) {
+    public Ball(double weight, double volume, Color color) {
         this.weight = weight;
         this.volume = volume;
         this.color = color;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
@@ -46,7 +46,7 @@ public class Ball {
 
         Ball ball = (Ball) o;
 
-        if (weight != ball.weight) return false;
+        if (Double.compare(ball.weight, weight) != 0) return false;
         if (Double.compare(ball.volume, volume) != 0) return false;
         return color == ball.color;
     }
@@ -55,7 +55,8 @@ public class Ball {
     public int hashCode() {
         int result;
         long temp;
-        result = weight;
+        temp = Double.doubleToLongBits(weight);
+        result = (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(volume);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (color != null ? color.hashCode() : 0);
