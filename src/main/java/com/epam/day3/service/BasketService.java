@@ -4,7 +4,6 @@ import com.epam.day3.entity.Ball;
 import com.epam.day3.entity.Basket;
 import com.epam.day3.entity.Color;
 import com.epam.day3.exception.CustomException;
-import com.epam.day3.validator.BallValidator;
 
 import java.util.List;
 

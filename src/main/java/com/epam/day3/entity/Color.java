@@ -1,11 +1,11 @@
 package com.epam.day3.entity;
 
 public enum Color {
-    BLUE ("Blue"),
-    YELLOW ("Yellow"),
-    RED ("Red"),
-    BLACK ("Black"),
-    WHITE ("White");
+    BLUE("Blue"),
+    YELLOW("Yellow"),
+    RED("Red"),
+    BLACK("Black"),
+    WHITE("White");
 
     private String color;
 

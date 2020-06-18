@@ -34,8 +34,8 @@ public class BasketServiceTest {
 
     @DataProvider(name = "basket - 2")
     public Object[] createBasket() {
-        basket = new Basket(new ArrayList<>(), 9, 1);
-        basket1 = new Basket(new ArrayList<>(), 10, 1);
+        basket = new Basket(new ArrayList<>());
+        basket1 = new Basket(new ArrayList<>());
         try {
             basket.add(new Ball(194.3, 3.3, Color.BLUE));
             basket.add(new Ball(170.3, 2.0, Color.RED));
@@ -57,9 +57,9 @@ public class BasketServiceTest {
         service.calculateOccupiedPlace(basket);
     }
 
-    @Test(dataProvider = "basket - 2")
+    @Test(priority = 3, dataProvider = "basket - 2")
     public void calculateOccupiedPlacePositiveTest(Basket basket) {
-       try{
+        try {
             double expected = 0;
             double actual = service.calculateOccupiedPlace(basket);
             for (int i = 0; i < basket.size(); i++) {
@@ -73,41 +73,42 @@ public class BasketServiceTest {
     }
 
 
-    @Test
+    @Test(priority = 2)
     public void filUpBasketPositiveTest() {
-        Basket basket = new Basket(new ArrayList<Ball>(), 7.3, 1);
+        Basket basket = new Basket(new ArrayList<Ball>());
         try {
             double actual = service.fillUplBasket(balls, basket);
-            double expected = 7.3 - 3.3 -2.0 - 1.9;
+            double expected = 17 - 3.3 - 2.0 - 1.9 - 1.7;
             assertEquals(actual, expected, 0.01);
         } catch (CustomException e) {
             fail();
         }
     }
 
-    @Test (enabled = true, expectedExceptions = CustomException.class, expectedExceptionsMessageRegExp = "basket is empty")
+    @Test(priority = 1, enabled = true, expectedExceptions = CustomException.class, expectedExceptionsMessageRegExp = "basket is empty")
     public void filUpBasketNegativeTest() throws CustomException {
         service.fillUplBasket(balls, basket);
     }
-@Test(dataProvider = "basket - 2")
-   public void countOneColorBallPositiveTest(Basket basket){
-    try {
-        int expected = 2;
-        int actual = service.countOneColorBall(basket, Color.BLUE);
-        assertEquals(actual, expected);
-    } catch (CustomException e) {
-        fail();
-    }
-}
 
-    @Test (enabled = true, expectedExceptions = CustomException.class, expectedExceptionsMessageRegExp = "basket is empty")
+    @Test(priority = 3, dataProvider = "basket - 2")
+    public void countOneColorBallPositiveTest(Basket basket) {
+        try {
+            int expected = 2;
+            int actual = service.countOneColorBall(basket, Color.BLUE);
+            assertEquals(actual, expected);
+        } catch (CustomException e) {
+            fail();
+        }
+    }
+
+    @Test(priority = 1, enabled = true, expectedExceptions = CustomException.class, expectedExceptionsMessageRegExp = "basket is empty")
     public void countOneColorBallNegativeTest() throws CustomException {
         service.countOneColorBall(basket, Color.BLUE);
     }
 
-    @Test
-    public void calculateBallWeightPositiveTest(){
-        basket = new Basket(new ArrayList<>(), 9, 1);
+    @Test(priority = 2)
+    public void calculateBallWeightPositiveTest() {
+        basket = new Basket(new ArrayList<>());
         try {
             basket.add(new Ball(194.3, 3.3, Color.BLUE));
             basket.add(new Ball(170.3, 2.0, Color.RED));
@@ -120,7 +121,7 @@ public class BasketServiceTest {
         }
     }
 
-    @Test (enabled = true, expectedExceptions = CustomException.class, expectedExceptionsMessageRegExp = "basket is empty")
+    @Test(priority = 1, enabled = true, expectedExceptions = CustomException.class, expectedExceptionsMessageRegExp = "basket is empty")
     public void calculateBallWeightNegativeTest() throws CustomException {
         service.calculateBallWeight(basket);
     }

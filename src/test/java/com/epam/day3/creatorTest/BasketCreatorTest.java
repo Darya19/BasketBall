@@ -9,7 +9,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
@@ -24,8 +23,8 @@ public class BasketCreatorTest {
     }
 
     @Test
-    public void createBasketTest(){
-        Basket expected = new Basket(new ArrayList<>(), 45, 1);
+    public void createBasketTest() {
+        Basket expected = new Basket(new ArrayList<>());
         try {
             expected.add(new Ball(250.4, 2.5, Color.RED));
             expected.add(new Ball(500, 5.6, Color.BLUE));
@@ -35,15 +34,15 @@ public class BasketCreatorTest {
             expected.add(new Ball(97.6, 0.9, Color.BLACK));
             Basket actual = creator.createBasket();
             assertEquals(actual, expected);
-        }catch (CustomException e) {
+        } catch (CustomException e) {
             fail();
         }
     }
 
     @Test
-    public void createEmptyBasketTest(){
+    public void createEmptyBasketTest() {
         Basket actual = creator.createEmptyBasket();
-        Basket expected = new Basket(new ArrayList<Ball>(), 15, 1);
+        Basket expected = new Basket(new ArrayList<Ball>());
         assertEquals(actual, expected);
     }
 }

@@ -17,12 +17,12 @@ public class BasketCreator {
         balls.add(new Ball(117.9, 1.3, Color.BLUE));
         balls.add(new Ball(463.7, 4.9, Color.RED));
         balls.add(new Ball(97.6, 0.9, Color.BLACK));
-        Basket basket = new Basket(balls, 45, 1);
+        Basket basket = new Basket(balls);
         return basket;
     }
 
     public Basket createEmptyBasket() {
-        Basket basket = new Basket(new ArrayList<>(), 15, 1);
+        Basket basket = new Basket(new ArrayList<>());
         return basket;
     }
 }

@@ -78,8 +78,8 @@ public class BallCreatorTest {
     @Test(timeOut = 100)
     public void createBallsListAssertVolumeBordersTest() {
         List<Ball> actual = creator.createBallsList();
-        for (int i = 0; i < actual.size() ; i++) {
-          assertFalse(actual.get(i).getVolume() < 0.16 && actual.get(i).getVolume() > 5.6);
+        for (int i = 0; i < actual.size(); i++) {
+            assertFalse(actual.get(i).getVolume() < 0.16 && actual.get(i).getVolume() > 5.6);
 
         }
     }
