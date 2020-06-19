@@ -1,6 +1,6 @@
 package com.epam.day3.creatorTest;
 
-import com.epam.day3.creater.BasketCreator;
+import com.epam.day3.creator.BasketCreator;
 import com.epam.day3.entity.Basket;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

@@ -1,4 +1,4 @@
-package com.epam.day3.creater;
+package com.epam.day3.creator;
 
 import com.epam.day3.entity.Ball;
 import com.epam.day3.entity.Color;

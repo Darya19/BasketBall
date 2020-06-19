@@ -1,6 +1,6 @@
 package com.epam.day3.creatorTest;
 
-import com.epam.day3.creater.BallCreator;
+import com.epam.day3.creator.BallCreator;
 import com.epam.day3.entity.Ball;
 import com.epam.day3.entity.Color;
 import org.testng.annotations.BeforeClass;
