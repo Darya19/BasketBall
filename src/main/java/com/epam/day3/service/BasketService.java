@@ -6,60 +6,50 @@ import com.epam.day3.entity.Color;
 import com.epam.day3.exception.CustomException;
 
 import java.util.List;
+import java.util.Optional;
 
 public class BasketService {
 
-    public double calculateOccupiedPlace(Basket basket) throws CustomException {
-        if (basket == null) {
-            throw new CustomException("basket is empty");
+    public Optional<Integer> fillUplBasket(Basket basket, Ball ... ball) {
+        double occupiedPlace = 0;
+        int count = 0;
+        if (basket == null || ball == null) {
+            return Optional.empty();
         } else {
-            Basket.occupiedPlace = 0;
-            for (int i = 0; i < basket.size(); i++) {
-                Basket.occupiedPlace += basket.get(i).getVolume();
-            }
-            return Basket.occupiedPlace;
-        }
-    }
-
-    public double fillUplBasket(List<Ball> balls, Basket basket) throws CustomException {
-        double freePlace;
-        if (basket == null) {
-            throw new CustomException("basket is empty");
-        } else {
-            for (int i = 0; i < balls.size(); i++) {
-                if ((basket.getMaxCapacity() - Basket.occupiedPlace) > balls.get(i).getVolume()) {
-                    basket.add(balls.get(i));
-                    Basket.occupiedPlace += balls.get(i).getVolume();
+            for (int i = 0; i < ball.length; i++) {
+                    if ((Basket.getMaxCapacity() - occupiedPlace) > ball[i].getVolume()) {
+                        basket.add(ball[i]);
+                        occupiedPlace += ball[i].getVolume();
+                        count++;
+                    }
                 }
-            }
-            freePlace = basket.getMaxCapacity() - Basket.occupiedPlace;
+                return Optional.of(count);
         }
-        return freePlace;
     }
 
-    public int countOneColorBall(Basket basket, Color color) throws CustomException {
+    public Optional<Integer> countOneColorBall(Basket basket, Color color) {
         if (basket == null) {
-            throw new CustomException("basket is empty");
+            return Optional.empty();
         } else {
-            int count = 0;
-            for (int i = 0; i < basket.size(); i++) {
-                if (basket.get(i).getColor() == color) {
-                    count++;
+                int count = 0;
+                for (int i = 0; i < basket.size(); i++) {
+                    if (basket.get(i).getColor() == color) {
+                        count++;
+                    }
                 }
+                return Optional.of(count);
             }
-            return count;
         }
-    }
 
-    public double calculateBallWeight(Basket basket) throws CustomException {
+    public Optional<Double> calculateBallWeight(Basket basket) {
         if (basket == null) {
-            throw new CustomException("basket is empty");
+            return Optional.empty();
         } else {
-            double sumWeigh = 0;
-            for (int i = 0; i < basket.size(); i++) {
-                sumWeigh = (sumWeigh + basket.get(i).getWeight());
-            }
-            return sumWeigh;
+                double sumWeight = 0;
+                for (int i = 0; i < basket.size(); i++) {
+                    sumWeight = (sumWeight + basket.get(i).getWeight());
+                }
+                return Optional.of(sumWeight);
         }
     }
 }

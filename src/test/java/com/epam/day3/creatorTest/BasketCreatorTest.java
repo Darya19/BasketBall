@@ -4,18 +4,16 @@ import com.epam.day3.creater.BasketCreator;
 import com.epam.day3.entity.Ball;
 import com.epam.day3.entity.Basket;
 import com.epam.day3.entity.Color;
-import com.epam.day3.exception.CustomException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.fail;
 
 public class BasketCreatorTest {
 
-    BasketCreator creator;
+   private BasketCreator creator;
 
     @BeforeClass
     public void setUp() {
@@ -25,7 +23,6 @@ public class BasketCreatorTest {
     @Test
     public void createBasketTest() {
         Basket expected = new Basket(new ArrayList<>());
-        try {
             expected.add(new Ball(250.4, 2.5, Color.RED));
             expected.add(new Ball(500, 5.6, Color.BLUE));
             expected.add(new Ball(3.3, 0.17, Color.YELLOW));
@@ -34,15 +31,12 @@ public class BasketCreatorTest {
             expected.add(new Ball(97.6, 0.9, Color.BLACK));
             Basket actual = creator.createBasket();
             assertEquals(actual, expected);
-        } catch (CustomException e) {
-            fail();
-        }
     }
 
     @Test
     public void createEmptyBasketTest() {
         Basket actual = creator.createEmptyBasket();
-        Basket expected = new Basket(new ArrayList<Ball>());
+        Basket expected = new Basket(new ArrayList<>());
         assertEquals(actual, expected);
     }
 }

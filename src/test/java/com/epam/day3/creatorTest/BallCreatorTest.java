@@ -12,7 +12,7 @@ import static org.testng.Assert.*;
 
 public class BallCreatorTest {
 
-    BallCreator creator;
+    private BallCreator creator;
 
     @BeforeClass
     public void setUp() {

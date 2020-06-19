@@ -8,8 +8,6 @@ public class Basket {
 
     private List<Ball> basket;
     private static final double MAX_CAPACITY = 17;
-    private static final double MIN_CAPACITY = 1;
-    public static double occupiedPlace;
 
     public Basket() {
     }
@@ -22,40 +20,21 @@ public class Basket {
         return MAX_CAPACITY;
     }
 
-    public static double getMinCapacity() {
-        return MIN_CAPACITY;
-    }
-
-    public Ball get(int index) throws CustomException {
-        if (basket.get(index) == null) {
-            throw new CustomException("ball don't exist");
-        } else {
+    public Ball get(int index) {
             return basket.get(index);
-        }
     }
 
-    public boolean add(Ball ball) throws CustomException {
-        if (ball == null) {
-            throw new CustomException("empty ball");
-        }
+    public boolean add(Ball ball) {
         return basket.add(ball);
     }
 
-    public Ball remove(int index) throws CustomException {
-        if (basket.get(index) == null) {
-            throw new CustomException("ball don't exist");
-        } else {
+    public Ball remove(int index) {
             return basket.remove(index);
         }
-    }
 
-    public int size() throws CustomException {
-        if (basket == null) {
-            throw new CustomException("basket is empty");
-        } else {
+    public int size() {
             return basket.size();
         }
-    }
 
     @Override
     public boolean equals(Object o) {
