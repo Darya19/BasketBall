@@ -8,7 +8,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 public class BallCreatorTest {
 
@@ -20,53 +21,21 @@ public class BallCreatorTest {
     }
 
     @Test
-    public void createBallAssertObjectPresentsTest() {
-        Ball actual = creator.createBall();
-        assertNotNull(actual);
-    }
-
-    @Test
-    public void createBallAssertVolumePresentsTest() {
-        Ball actual = creator.createBall();
-        assertNotNull(actual.getVolume());
-    }
-
-    @Test
-    public void createBallAssertColorPresentsTest() {
-        Ball actual = creator.createBall();
-        assertNotNull(actual.getColor());
-    }
-
-    @Test
-    public void createBallAssertWeightPresentsTest() {
-        Ball actual = creator.createBall();
-        assertNotNull(actual.getWeight());
-    }
-
-    @Test
-    public void createBallAssertWeightBordersTest() {
-        Ball actual = creator.createBall();
-        assertTrue(actual.getWeight() > 0 && actual.getWeight() < 999.9);
-    }
-
-    @Test
-    public void createBallAssertVolumeBordersTest() {
-        Ball actual = creator.createBall();
-        assertTrue(actual.getVolume() > 0 && actual.getVolume() < 9.9);
-    }
-
-    @Test
-    public void createBallAssertColorBordersTest() {
-        Ball actual = creator.createBall();
-        assertTrue(actual.getColor().equals(Color.BLUE) || actual.getColor().equals(Color.RED)
-                || actual.getColor().equals(Color.BLACK) || actual.getColor().equals(Color.YELLOW)
-                || actual.getColor().equals(Color.WHITE));
-    }
-
-    @Test
-    public void createBallsListAssertBallPresentsTest() {
+    public void createBallsListAssertListPresentsTest() {
         List<Ball> actual = creator.createBallsList();
         assertNotNull(actual);
+    }
+
+    @Test
+    public void createBallsListAssertLastBallPresentsTest() {
+        List<Ball> actual = creator.createBallsList();
+        assertNotNull(actual.get(actual.size() - 1));
+    }
+
+    @Test
+    public void createBallsListAssertFirstBallPresentsTest() {
+        List<Ball> actual = creator.createBallsList();
+        assertNotNull(actual.get(actual.size() - 1));
     }
 
     @Test
@@ -75,13 +44,23 @@ public class BallCreatorTest {
         assertTrue(actual.size() < 10);
     }
 
-    @Test(timeOut = 100)
+    @Test(timeOut = 10)
     public void createBallsListAssertVolumeBordersTest() {
         List<Ball> actual = creator.createBallsList();
-        for (int i = 0; i < actual.size(); i++) {
-            assertFalse(actual.get(i).getVolume() < 0.16 && actual.get(i).getVolume() > 5.6);
-
-        }
+        assertTrue(actual.get(0).getVolume() >= 0.16 && actual.get(0).getVolume() <= 5.6);
     }
 
+    @Test(timeOut = 10)
+    public void createBallsListAssertWeightBordersTest() {
+        List<Ball> actual = creator.createBallsList();
+        assertTrue(actual.get(actual.size() - 1).getWeight() <= 500 && actual.get(actual.size() - 1).getVolume() >= 2.7);
+    }
+
+    @Test
+    public void createBallAssertColorBordersTest() {
+        List<Ball> actual = creator.createBallsList();
+        assertTrue(actual.get(1).getColor().equals(Color.BLUE) || actual.get(1).getColor().equals(Color.RED)
+                || actual.get(1).getColor().equals(Color.BLACK) || actual.get(1).getColor().equals(Color.YELLOW)
+                || actual.get(1).getColor().equals(Color.WHITE));
+    }
 }

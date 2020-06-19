@@ -1,16 +1,11 @@
 package com.epam.day3.entity;
 
-import com.epam.day3.exception.CustomException;
-
 import java.util.List;
 
 public class Basket {
 
     private List<Ball> basket;
     private static final double MAX_CAPACITY = 17;
-
-    public Basket() {
-    }
 
     public Basket(List<Ball> basket) {
         this.basket = basket;
@@ -21,7 +16,7 @@ public class Basket {
     }
 
     public Ball get(int index) {
-            return basket.get(index);
+        return basket.get(index);
     }
 
     public boolean add(Ball ball) {
@@ -29,12 +24,12 @@ public class Basket {
     }
 
     public Ball remove(int index) {
-            return basket.remove(index);
-        }
+        return basket.remove(index);
+    }
 
     public int size() {
-            return basket.size();
-        }
+        return basket.size();
+    }
 
     @Override
     public boolean equals(Object o) {

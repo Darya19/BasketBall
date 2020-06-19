@@ -10,30 +10,19 @@ import java.util.Random;
 
 public class BallCreator {
 
-    public Ball createBall() {
-        Ball ball = new Ball();
-        Random random = new Random();
-        double weight = (Math.random() * 1000);
-        double volume = (Math.random() * 10);
-        ball.setWeight(weight);
-        ball.setVolume(volume);
-        Color[] colors = {Color.BLUE, Color.BLACK, Color.RED, Color.WHITE, Color.YELLOW};
-        int nextColor = random.nextInt(colors.length);
-        ball.setColor(colors[nextColor]);
-        return ball;
-    }
-
     public List<Ball> createBallsList() {
         BallValidator validator = new BallValidator();
+        Random random = new Random();
         List<Ball> balls = new ArrayList<>();
+        Color[] colors = {Color.BLUE, Color.BLACK, Color.RED, Color.WHITE, Color.YELLOW};
         for (int i = 0; i < 10; i++) {
-            Ball ball = createBall();
+            int nextColor = random.nextInt(colors.length);
+            Ball ball = new Ball((Math.random() * 1000), Math.random() * 10, colors[nextColor]);
             if (validator.validateBallWeight(ball.getWeight())
                     && validator.validateBallVolume(ball.getVolume())) {
                 balls.add(ball);
             }
         }
-
         return balls;
     }
 }

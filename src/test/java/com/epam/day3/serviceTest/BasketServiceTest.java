@@ -15,7 +15,7 @@ import static org.testng.Assert.assertEquals;
 
 public class BasketServiceTest {
 
-   private BasketService service;
+    private BasketService service;
     private Basket basket;
     private Ball[] balls;
 
@@ -64,7 +64,7 @@ public class BasketServiceTest {
     @Test(priority = 1, description = "test empty ball")
     public void filUpBasketEmptyBallTest() {
         basket = new Basket(new ArrayList<>());
-        Optional<Integer> actual = service.fillUplBasket(basket,  null);
+        Optional<Integer> actual = service.fillUplBasket(basket, null);
         Optional<Integer> expected = Optional.empty();
         assertEquals(actual, expected);
     }
@@ -100,5 +100,4 @@ public class BasketServiceTest {
         Optional<Double> expected = Optional.empty();
         assertEquals(actual, expected);
     }
-
 }

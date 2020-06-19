@@ -6,9 +6,6 @@ public class Ball {
     private double volume;
     private Color color;
 
-    public Ball() {
-    }
-
     public Ball(double weight, double volume, Color color) {
         this.weight = weight;
         this.volume = volume;
