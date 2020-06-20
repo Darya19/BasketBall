@@ -41,7 +41,7 @@ public class BallCreatorTest {
     @Test
     public void createBallsListAssertListSizeTest() {
         List<Ball> actual = creator.createBallsList();
-        assertTrue(actual.size() < 5);
+        assertTrue(actual.size() < 6);
     }
 
     @Test(timeOut = 10)
