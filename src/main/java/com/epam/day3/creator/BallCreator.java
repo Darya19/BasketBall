@@ -15,14 +15,14 @@ public class BallCreator {
         Random random = new Random();
         List<Ball> balls = new ArrayList<>();
         Color[] colors = {Color.BLUE, Color.BLACK, Color.RED, Color.WHITE, Color.YELLOW};
-        for (int i = 0; i < 10; i++) {
-            int nextColor = random.nextInt(colors.length);
-            Ball ball = new Ball((Math.random() * 1000), Math.random() * 10, colors[nextColor]);
-            if (validator.validateBallWeight(ball.getWeight())
-                    && validator.validateBallVolume(ball.getVolume())) {
-                balls.add(ball);
+        while (balls.size() < 5) {
+                int nextColor = random.nextInt(colors.length);
+                Ball ball = new Ball((Math.random() * 1000), Math.random() * 10, colors[nextColor]);
+                if (validator.validateBallWeight(ball.getWeight())
+                        && validator.validateBallVolume(ball.getVolume())) {
+                    balls.add(ball);
+                }
             }
-        }
         return balls;
     }
 }
