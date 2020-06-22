@@ -1,5 +1,7 @@
 package com.epam.day3.entity;
 
+import com.epam.day3.exception.CustomException;
+
 import java.util.List;
 
 public class Basket {
@@ -15,16 +17,29 @@ public class Basket {
         return MAX_CAPACITY;
     }
 
-    public Ball get(int index) {
-        return basket.get(index);
+    public Ball get(int index) throws CustomException {
+        if (index < 0 || index > basket.size() - 1) {
+            throw new CustomException("incorrect index");
+        } else
+            return basket.get(index);
     }
 
     public boolean add(Ball ball) {
-        return basket.add(ball);
+        if (ball == null) {
+            return false;
+        } else {
+            basket.add(ball);
+            return true;
+        }
     }
 
-    public Ball remove(int index) {
-        return basket.remove(index);
+    public boolean remove(int index) {
+        if (index < 0 || index > basket.size() - 1) {
+            return false;
+        } else {
+            basket.remove(index);
+            return true;
+        }
     }
 
     public int size() {
@@ -49,7 +64,15 @@ public class Basket {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Basket{");
-        sb.append("basket=").append(basket);
+        sb.append("basket=");
+        for (int i = 0; i < basket.size(); i++) {
+            sb.append(basket.get(i));
+            if (i != basket.size() - 1) {
+                sb.append(", ");
+            } else {
+                sb.append("]");
+            }
+        }
         sb.append('}');
         return sb.toString();
     }

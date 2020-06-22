@@ -72,8 +72,12 @@ public class BasketServiceTest {
         assertEquals(actual, expected);
     }
 
-    @Test(priority = 3, dataProvider = "basket - 2")
-    public void countOneColorBallPositiveTest(Basket basket) {
+    @Test(priority = 3)
+    public void countOneColorBallPositiveTest() {
+        Basket basket = new Basket(new ArrayList<>());
+        basket.add(new Ball(194.3, 3.3, Color.BLUE));
+        basket.add(new Ball(170.3, 2.0, Color.RED));
+        basket.add(new Ball(163.7, 1.9, Color.BLUE));
         Optional<Integer> expected = Optional.of(2);
         Optional<Integer> actual = service.countOneColorBall(basket, Color.BLUE);
         assertEquals(actual, expected);

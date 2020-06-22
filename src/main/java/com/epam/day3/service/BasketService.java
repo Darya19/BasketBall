@@ -3,6 +3,7 @@ package com.epam.day3.service;
 import com.epam.day3.entity.Ball;
 import com.epam.day3.entity.Basket;
 import com.epam.day3.entity.Color;
+import com.epam.day3.exception.CustomException;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,19 +33,27 @@ public class BasketService {
 
     public Optional<Integer> countOneColorBall(Basket basket, Color color) {
         int count = 0;
-        for (int i = 0; i < basket.size(); i++) {
-            if (basket.get(i).getColor() == color) {
-                count++;
+        try {
+            for (int i = 0; i < basket.size(); i++) {
+                if (basket.get(i).getColor() == color) {
+                    count++;
+                }
             }
+            return Optional.of(count);
+        } catch (CustomException e) {
+            return Optional.empty();
         }
-        return Optional.of(count);
     }
 
     public Optional<Double> calculateBallWeight(Basket basket) {
         double sumWeight = 0;
-        for (int i = 0; i < basket.size(); i++) {
-            sumWeight = (sumWeight + basket.get(i).getWeight());
+        try {
+            for (int i = 0; i < basket.size(); i++) {
+                sumWeight = (sumWeight + basket.get(i).getWeight());
+            }
+            return Optional.of(sumWeight);
+        } catch (CustomException e) {
+            return Optional.empty();
         }
-        return Optional.of(sumWeight);
     }
 }
