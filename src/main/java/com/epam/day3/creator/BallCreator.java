@@ -16,13 +16,13 @@ public class BallCreator {
         List<Ball> balls = new ArrayList<>();
         Color[] colors = {Color.BLUE, Color.BLACK, Color.RED, Color.WHITE, Color.YELLOW};
         while (balls.size() < 5) {
-                int nextColor = random.nextInt(colors.length);
-                Ball ball = new Ball((Math.random() * 1000), Math.random() * 10, colors[nextColor]);
-                if (validator.validateBallWeight(ball.getWeight())
-                        && validator.validateBallVolume(ball.getVolume())) {
-                    balls.add(ball);
-                }
+            int nextColor = random.nextInt(colors.length);
+            Ball ball = new Ball((Math.random() * 1000), Math.random() * 10, colors[nextColor]);
+            if (validator.validateBallWeight(ball.getWeight())
+                    && validator.validateBallVolume(ball.getVolume())) {
+                balls.add(ball);
             }
+        }
         return balls;
     }
 }
